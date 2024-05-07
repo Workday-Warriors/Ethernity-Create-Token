@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #000000;
+}
+
+/* 
+  font-size: 80px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1.6px;
+*/
+
+.hero_title {
+  background: linear-gradient(91deg, #ff1cf7 2.26%, #00f0ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text_gradiant {
+  background: linear-gradient(91deg, #ff1cf7 2.26%, #00f0ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.main_bg {
+  background: linear-gradient(91deg, #ff1cf7 2.26%, #00f0ff 100%);
+}
