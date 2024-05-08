@@ -48,28 +48,30 @@ export const Stepper = ({ steps, active }: Props) => {
     <ol className='space-y-4 grid px-4 lg:px-0 grid-cols-1 w-full lg:block  lg:w-72'>
       {steps.map((step, index) => (
         <li key={index}>
-          <div
-            className={`w-full p-4 ${
-              active > index
-                ? 'text-green-700 border-green-300 dark:border-green-800 dark:text-green-400'
-                : index === active
-                ? 'text-blue-700 dark:border-blue-800 dark:text-blue-400 border-blue-300'
-                : 'text-gray-900 bg-gray-100 border border-gray-300 rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400'
-            } border  rounded-lg bg-green-50 dark:bg-gray-800  `}
-            role='alert'
-          >
-            <div className='flex items-center justify-between'>
-              <span className='sr-only'>{step.title}</span>
-              <h3 className='font-medium'>
-                {index + 1}. {step.title}
-              </h3>
-              {active > index ? (
-                <CheckIcon />
-              ) : index === active ? (
-                <ArrowRightIcon />
-              ) : (
-                ''
-              )}
+          <div className='highlight-gradient rounded-lg p-0.5'>
+            <div
+              className={`w-full p-4 text-small   ${
+                active > index
+                  ? 'text-green-700 bg-gray-800 border-green-300'
+                  : index === active
+                  ? ' bg-gray-800 border-blue-800 text-blue-400'
+                  : '  border-gray-300 rounded-lg bg-gray-800 text-gray-400'
+              }  rounded-lg  `}
+              role='alert'
+            >
+              <div className='flex items-center justify-between'>
+                <span className='sr-only'>{step.title}</span>
+                <h3 className='font-medium'>
+                  {index + 1}. {step.title}
+                </h3>
+                {active > index ? (
+                  <CheckIcon />
+                ) : index === active ? (
+                  <ArrowRightIcon />
+                ) : (
+                  ''
+                )}
+              </div>
             </div>
           </div>
         </li>

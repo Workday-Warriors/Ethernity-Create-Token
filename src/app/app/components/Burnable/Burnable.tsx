@@ -25,7 +25,7 @@ export const Burnable = ({ form }: Props) => {
             />
             <label
               htmlFor='default-radio-1'
-              className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+              className='ms-2 text-sm font-medium text-gray-300'
             >
               yes
             </label>
@@ -41,7 +41,7 @@ export const Burnable = ({ form }: Props) => {
             />
             <label
               htmlFor='default-radio-2'
-              className='ms-2 text-sm font-medium text-gray-900 dark:text-gray-300'
+              className='ms-2 text-sm font-medium text-gray-300'
             >
               no
             </label>

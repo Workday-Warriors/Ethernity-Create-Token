@@ -10,20 +10,13 @@ export const Header = () => {
       <div className='w-full lg:w-auto flex justify-between gap-x-8'>
         <button
           onClick={() => router.push('/app')}
-          className='relative outline-none focus:outline-none active:outline-none inline-flex  group'
+          className='text-small text-white highlight-gradient h-[42px] rounded-lg px-3 lg:w-[200px] 2xl:w-[280px] w-full'
         >
-          <div className='absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt'></div>
-          <span className='relative inline-flex items-center justify-center px-3  md:px-4 lg:px-8 py-4 text-base lg:text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none'>
-            Launch App
-          </span>
+          Launch App
         </button>
-
         <DynamicConnectButton>
-          <button className='relative outline-none focus:outline-none active:outline-none inline-flex  group'>
-            <div className='absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt'></div>
-            <span className='relative inline-flex items-center justify-center px-3 md:px-4 lg:px-8 py-4 text-base lg:text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none'>
-              Connect Wallet
-            </span>
+          <button className='text-small text-white highlight-gradient h-[42px] rounded-lg  px-3 lg:w-[200px] 2xl:w-[280px] w-full'>
+            Connect Wallet
           </button>
         </DynamicConnectButton>
       </div>

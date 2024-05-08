@@ -8,7 +8,10 @@ import { Mintable } from './components/Mintable'
 import { Burnable } from './components/Burnable'
 import { InitialMint } from './components/InitialMint'
 import { TokenContract } from './components/TokenContract'
-import { DynamicWidget } from '@dynamic-labs/sdk-react-core'
+import {
+  DynamicConnectButton,
+  DynamicWidget,
+} from '@dynamic-labs/sdk-react-core'
 
 const STEP: Step[] = [
   {
@@ -112,7 +115,7 @@ export default function App() {
     <div className=' container'>
       <div className='pt-10 gap-x-10 lg:flex-row flex-col flex'>
         <Stepper active={active} steps={STEP} />
-        <div className='w-full lg:px-0 px-4 lg:w-[70%]'>
+        <div className='w-full lg:px-0 px-4 lg:w-[60%]'>
           <p className='text_gradiant mt-4 lg:mt-0 text-[15px]'>
             {STEP[active].description}
           </p>
@@ -122,19 +125,18 @@ export default function App() {
               {STEP.length - 1 === active ? (
                 <DynamicWidget />
               ) : (
-                <button
-                  type='submit'
-                  className='w-full my-5 relative outline-none focus:outline-none active:outline-none inline-flex  group'
-                >
-                  <div className='absolute w-full transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt'></div>
-                  <span className='relative w-full inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white transition-all duration-200 bg-gray-900 font-pj rounded-xl focus:outline-none'>
-                    {'Next'}
-                  </span>
+                <button className='text-small text-white highlight-gradient h-[42px] rounded-lg px-3 w-full'>
+                  Next
                 </button>
               )}
             </form>
           </div>
         </div>
+        <DynamicConnectButton>
+          <button className='text-small text-white highlight-gradient h-[42px] rounded-lg  px-3 lg:w-[200px] 2xl:w-[280px] w-full'>
+            Connect Wallet
+          </button>
+        </DynamicConnectButton>
       </div>
     </div>
   )
