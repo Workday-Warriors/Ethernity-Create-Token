@@ -7,6 +7,7 @@ export type Step = {
 export interface Props {
   steps: Step[]
   active: number
+  onChange?: (index: number) => void
 }
 
 const CheckIcon = () => (
@@ -43,12 +44,23 @@ const ArrowRightIcon = () => (
   </svg>
 )
 
-export const Stepper = ({ steps, active }: Props) => {
+export const Stepper = ({ steps, active, onChange }: Props) => {
+  const handleClick = (index: number) => {
+    if (onChange) {
+      if (index < active) {
+        onChange(index)
+      }
+    }
+  }
+
   return (
     <ol className='space-y-4 grid px-4 lg:px-0 grid-cols-1 w-full lg:block  lg:w-72'>
       {steps.map((step, index) => (
         <li key={index}>
-          <div className='highlight-gradient rounded-lg p-0.5'>
+          <div
+            onClick={() => handleClick(index)}
+            className='highlight-gradient cursor-pointer rounded-lg p-0.5'
+          >
             <div
               className={`w-full p-4 text-small   ${
                 active > index

@@ -11,6 +11,9 @@ export const TokenName = ({ form }: Props) => {
       <Controller
         control={form.control}
         name='token_name'
+        rules={{
+          required: 'Token Name is required',
+        }}
         render={({ field: { onChange, value } }) => (
           <TextInput
             placeholder='Token Name'

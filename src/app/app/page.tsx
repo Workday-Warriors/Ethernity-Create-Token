@@ -13,6 +13,8 @@ import {
   DynamicWidget,
   useDynamicContext,
 } from '@dynamic-labs/sdk-react-core'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const STEP: Step[] = [
   {
@@ -57,8 +59,23 @@ export default function App() {
   const form = useForm()
   const { primaryWallet } = useDynamicContext()
   const [active, setActive] = useState(0)
+  const isConnected = primaryWallet?.connected
 
   const onSubmit = (formData: any) => {
+    if (!isConnected) {
+      toast.error('Please connect wallet', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+        toastId: 'error',
+      })
+      return
+    }
     if (active === 0 && formData.token) {
       setActive(1)
     }
@@ -112,16 +129,30 @@ export default function App() {
     }
   }
 
-  const isConnected = primaryWallet?.connected
-
   const onLogout = () => {
     window.location.reload()
     localStorage.clear()
   }
   return (
     <div className=' container'>
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
       <div className='pt-10 gap-x-10 lg:flex-row flex-col flex'>
-        <Stepper active={active} steps={STEP} />
+        <Stepper
+          onChange={(act) => setActive(act)}
+          active={active}
+          steps={STEP}
+        />
         <div className='w-full lg:px-0 px-4 lg:w-[60%]'>
           <p className='text_gradiant mt-4 lg:mt-0 text-[15px]'>
             {STEP[active].description}
@@ -139,6 +170,7 @@ export default function App() {
             </form>
           </div>
         </div>
+
         {isConnected ? (
           <button
             className='text-small text-white highlight-gradient h-[42px] rounded-lg  px-3 lg:w-[200px] 2xl:w-[280px] w-full'
