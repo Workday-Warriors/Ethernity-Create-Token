@@ -34,6 +34,7 @@ export default function RootLayout({
             'walletconnect',
           ]),
         }}
+        theme={'dark'}
       >
         <body className={inter.className}>{children}</body>
       </DynamicContextProvider>

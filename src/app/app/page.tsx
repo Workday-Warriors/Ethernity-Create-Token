@@ -11,6 +11,7 @@ import { TokenContract } from './components/TokenContract'
 import {
   DynamicConnectButton,
   DynamicWidget,
+  useDynamicContext,
 } from '@dynamic-labs/sdk-react-core'
 
 const STEP: Step[] = [
@@ -54,7 +55,7 @@ const STEP: Step[] = [
 
 export default function App() {
   const form = useForm()
-
+  const { primaryWallet } = useDynamicContext()
   const [active, setActive] = useState(0)
 
   const onSubmit = (formData: any) => {
@@ -111,6 +112,12 @@ export default function App() {
     }
   }
 
+  const isConnected = primaryWallet?.connected
+
+  const onLogout = () => {
+    window.location.reload()
+    localStorage.clear()
+  }
   return (
     <div className=' container'>
       <div className='pt-10 gap-x-10 lg:flex-row flex-col flex'>
@@ -132,11 +139,21 @@ export default function App() {
             </form>
           </div>
         </div>
-        <DynamicConnectButton>
-          <button className='text-small text-white highlight-gradient h-[42px] rounded-lg  px-3 lg:w-[200px] 2xl:w-[280px] w-full'>
-            Connect Wallet
+        {isConnected ? (
+          <button
+            className='text-small text-white highlight-gradient h-[42px] rounded-lg  px-3 lg:w-[200px] 2xl:w-[280px] w-full'
+            onClick={onLogout}
+          >
+            {primaryWallet?.address.slice(0, 6)}...
+            {primaryWallet?.address.slice(-4)}
           </button>
-        </DynamicConnectButton>
+        ) : (
+          <DynamicConnectButton>
+            <button className='text-small text-white highlight-gradient h-[42px] rounded-lg  px-3 lg:w-[200px] 2xl:w-[280px] w-full'>
+              Connect Wallet
+            </button>
+          </DynamicConnectButton>
+        )}
       </div>
     </div>
   )
