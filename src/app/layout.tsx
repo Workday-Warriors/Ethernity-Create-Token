@@ -1,11 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import {
-  DynamicContextProvider,
-  EthereumWalletConnectors,
-  DynamicWidget,
-} from '@/lib/dynamic'
+import { DynamicContextProvider, EthereumWalletConnectors } from '@/lib/dynamic'
 
 const inter = Inter({ subsets: ['latin'] })
 

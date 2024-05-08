@@ -14,7 +14,7 @@ export const TokenInput = ({ form }: Props) => {
         rules={{
           required: 'This field is required',
           pattern: {
-            value: /^[\w-]+\.[\w-]+\.[\w-]+$/,
+            value: /^[^\W_]{1,8}$/,
             message: 'Invalid token',
           },
         }}

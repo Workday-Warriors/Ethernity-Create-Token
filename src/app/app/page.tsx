@@ -55,10 +55,7 @@ export default function App() {
   const [active, setActive] = useState(0)
 
   const onSubmit = (formData: any) => {
-    if (
-      (active === 0 && formData.token && formData.token.length < 3) ||
-      formData.token.length > 16
-    ) {
+    if (active === 0 && formData.token) {
       setActive(1)
     }
 
@@ -113,10 +110,10 @@ export default function App() {
 
   return (
     <div className=' container'>
-      <div className='pt-10 gap-x-10 flex'>
+      <div className='pt-10 gap-x-10 lg:flex-row flex-col flex'>
         <Stepper active={active} steps={STEP} />
-        <div className='w-[70%]'>
-          <p className='text_gradiant text-[15px]'>
+        <div className='w-full lg:px-0 px-4 lg:w-[70%]'>
+          <p className='text_gradiant mt-4 lg:mt-0 text-[15px]'>
             {STEP[active].description}
           </p>
           <div>

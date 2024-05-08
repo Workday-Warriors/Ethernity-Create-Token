@@ -45,7 +45,7 @@ const ArrowRightIcon = () => (
 
 export const Stepper = ({ steps, active }: Props) => {
   return (
-    <ol className='space-y-4 w-72'>
+    <ol className='space-y-4 grid px-4 lg:px-0 grid-cols-1 w-full lg:block  lg:w-72'>
       {steps.map((step, index) => (
         <li key={index}>
           <div
