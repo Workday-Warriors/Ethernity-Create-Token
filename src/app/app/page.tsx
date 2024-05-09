@@ -130,45 +130,47 @@ export default function App() {
   }
 
   return (
-    <div className=' container'>
-      <ToastContainer
-        position='top-right'
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme='light'
-      />
+    <>
       <Header form={form} />
-
-      <div className='pt-10 gap-x-10 lg:flex-row flex-col flex'>
-        <Stepper
-          onChange={(act) => setActive(act)}
-          active={active}
-          steps={STEP}
+      <div className=' container'>
+        <ToastContainer
+          position='top-right'
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme='light'
         />
-        <div className='w-full lg:px-0 px-4 lg:w-[60%]'>
-          <p className='text_gradiant mt-4 lg:mt-0 text-[15px]'>
-            {STEP[active].description}
-          </p>
-          <div>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-              <div className='my-10'>{renderInput()}</div>
-              {STEP.length - 1 === active ? (
-                <DynamicWidget />
-              ) : (
-                <button className='text-small text-white highlight-gradient h-[42px] rounded-lg px-3 w-full'>
-                  Next
-                </button>
-              )}
-            </form>
+
+        <div className='pt-10 gap-x-10 lg:flex-row flex-col flex'>
+          <Stepper
+            onChange={(act) => setActive(act)}
+            active={active}
+            steps={STEP}
+          />
+          <div className='w-full lg:px-0 px-4 lg:w-[60%]'>
+            <p className='text_gradiant mt-4 lg:mt-0 text-[15px]'>
+              {STEP[active].description}
+            </p>
+            <div>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+                <div className='my-10'>{renderInput()}</div>
+                {STEP.length - 1 === active ? (
+                  <DynamicWidget />
+                ) : (
+                  <button className='text-small text-white highlight-gradient h-[42px] rounded-lg px-3 w-full'>
+                    Next
+                  </button>
+                )}
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
