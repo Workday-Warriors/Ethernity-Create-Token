@@ -9,7 +9,7 @@ export const TokenIcon = ({ form }: Props) => {
     <Controller
       control={form.control}
       name='token_icon'
-      render={({ field: { onChange, value } }) => (
+      render={({ field: { onChange } }) => (
         <div className='flex items-center justify-center w-full'>
           <label
             htmlFor='dropzone-file'
@@ -40,8 +40,7 @@ export const TokenIcon = ({ form }: Props) => {
               </p>
             </div>
             <input
-              value={value}
-              onChange={onChange}
+              onChange={(e: any) => onChange(e.target.files[0] as any)}
               id='dropzone-file'
               type='file'
               className='hidden'

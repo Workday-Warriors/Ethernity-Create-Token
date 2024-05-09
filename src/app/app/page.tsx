@@ -1,7 +1,7 @@
 'use client'
 import { Step, Stepper } from '@/components/Stepper/Stepper'
 import { useForm } from 'react-hook-form'
-import { MaxSupply, TokenInput, TokenName } from './components'
+import { Header, MaxSupply, TokenInput, TokenName } from './components'
 import { useState } from 'react'
 import { TokenIcon } from './components/TokenIcon'
 import { Mintable } from './components/Mintable'
@@ -129,10 +129,6 @@ export default function App() {
     }
   }
 
-  const onLogout = () => {
-    window.location.reload()
-    localStorage.clear()
-  }
   return (
     <div className=' container'>
       <ToastContainer
@@ -147,6 +143,8 @@ export default function App() {
         pauseOnHover
         theme='light'
       />
+      <Header form={form} />
+
       <div className='pt-10 gap-x-10 lg:flex-row flex-col flex'>
         <Stepper
           onChange={(act) => setActive(act)}
@@ -170,22 +168,6 @@ export default function App() {
             </form>
           </div>
         </div>
-
-        {isConnected ? (
-          <button
-            className='text-small text-white highlight-gradient h-[42px] rounded-lg  px-3 lg:w-[200px] 2xl:w-[280px] w-full'
-            onClick={onLogout}
-          >
-            {primaryWallet?.address.slice(0, 6)}...
-            {primaryWallet?.address.slice(-4)}
-          </button>
-        ) : (
-          <DynamicConnectButton>
-            <button className='text-small text-white highlight-gradient h-[42px] rounded-lg  px-3 lg:w-[200px] 2xl:w-[280px] w-full'>
-              Connect Wallet
-            </button>
-          </DynamicConnectButton>
-        )}
       </div>
     </div>
   )

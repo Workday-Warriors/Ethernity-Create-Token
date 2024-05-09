@@ -19,7 +19,8 @@ export const Burnable = ({ form }: Props) => {
               onChange={onChange}
               id='default-radio-1'
               type='radio'
-              value={value}
+              value={'Yes'}
+              checked={value === 'No'}
               name='default-radio'
               className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
             />
@@ -27,14 +28,15 @@ export const Burnable = ({ form }: Props) => {
               htmlFor='default-radio-1'
               className='ms-2 text-sm font-medium text-gray-300'
             >
-              yes
+              Yes
             </label>
           </div>
           <div className='flex items-center'>
             <input
               onChange={onChange}
-              value={value}
+              value='No'
               id='default-radio-2'
+              checked={value === 'No'}
               type='radio'
               name='default-radio'
               className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
@@ -43,7 +45,7 @@ export const Burnable = ({ form }: Props) => {
               htmlFor='default-radio-2'
               className='ms-2 text-sm font-medium text-gray-300'
             >
-              no
+              No
             </label>
           </div>
           {form.formState.errors.burnable?.message && (
