@@ -75,7 +75,7 @@ export const TokenIcon = ({ form }: Props) => {
           <button
             type='button'
             onClick={() => inputFile.current?.click()}
-            className='text-small text-white highlight-gradient h-[42px] rounded-lg px-3 mt-4 w-[50%]'
+            className='px-5 py-2  text-[14px] rounded-[8px] border border-[#303030] text-white flex items-center gap-x-2 w-1/2 mt-5 justify-center'
           >
             {inputFile.current?.files[0] ? 'Replace' : 'Upload'}
           </button>
