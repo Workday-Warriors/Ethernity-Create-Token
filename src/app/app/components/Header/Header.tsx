@@ -47,7 +47,9 @@ export const Header = ({ form }: Props) => {
           {form.watch('token_name') && (
             <div className='flex items-center gap-x-2'>
               <span className='font-extrabold'>Token Name:</span>{' '}
-              <span>{form.watch('token_name')?.slice(0, 15)}</span>
+              <span className='text-[#9ca3af]'>
+                {form.watch('token_name')?.slice(0, 15)}
+              </span>
             </div>
           )}
           {form.watch('token_icon') && (
@@ -63,19 +65,21 @@ export const Header = ({ form }: Props) => {
           {Boolean(form.watch('max_supply')) && (
             <div className='flex items-center gap-x-2'>
               <span className=' font-extrabold'>Max Supply:</span>{' '}
-              <span>{Number(form.watch('max_supply')).toLocaleString()}</span>
+              <span className='text-[#9ca3af]'>
+                {Number(form.watch('max_supply')).toLocaleString()}
+              </span>
             </div>
           )}
           {form.watch('mintable') && (
             <div className='flex items-center gap-x-2'>
               <span className='font-extrabold'>Mintable:</span>{' '}
-              <span>{form.watch('mintable')}</span>
+              <span className='text-[#9ca3af]'>{form.watch('mintable')}</span>
             </div>
           )}
           {form.watch('burnable') && (
             <div className='flex items-center gap-x-2'>
               <span className='font-extrabold'>Burnable:</span>{' '}
-              <span>{form.watch('burnable')}</span>
+              <span className='text-[#9ca3af]'>{form.watch('burnable')}</span>
             </div>
           )}
         </div>
