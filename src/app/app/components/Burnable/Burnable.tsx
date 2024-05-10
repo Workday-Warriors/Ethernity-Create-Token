@@ -22,7 +22,7 @@ export const Burnable = ({ form }: Props) => {
               value={'Yes'}
               checked={value === 'Yes'}
               name='default-radio'
-              className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+              className='w-4 h-4 text-blue-600 right-0 focus:shadow-none shadow-none outline-none focus:outline-none bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600'
             />
             <label
               htmlFor='default-radio-1'
@@ -39,7 +39,7 @@ export const Burnable = ({ form }: Props) => {
               checked={value === 'No'}
               type='radio'
               name='default-radio'
-              className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+              className='w-4 h-4 focus:ring-0 outline-none focus:shadow-none shadow-none  focus:outline-none text-blue-600 bg-gray-100 border-gray-300  dark:focus:ring-blue-600 dark:ring-offset-gray-800  dark:bg-gray-700 dark:border-gray-600'
             />
             <label
               htmlFor='default-radio-2'

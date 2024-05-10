@@ -37,7 +37,7 @@ export const Header = ({ form }: Props) => {
   return (
     <div className='border-b-[0.5px] border-b-[#303030] w-full '>
       <div className='text-white container gap-y-2  min-h-[70px] w-full flex flex-col lg:flex-row px-4  lg:px-0 justify-between items-start pt-4 lg:pt-0 lg:items-center'>
-        <div className='flex flex-col border-[0.5px] py-4 px-4 w-full lg:w-[85%]  overflow-x-auto border-[#303030] gap-y-4 lg:flex-row gap-x-4'>
+        <div className='flex flex-col py-4 px-4 w-full lg:w-[85%]  overflow-x-auto gap-y-4 lg:flex-row gap-x-4'>
           <div className='flex gap-x-1 items-center'>
             <span className=' font-extrabold'>Token Symbool:</span>
             <span className='text-[#9ca3af]'>
@@ -60,10 +60,10 @@ export const Header = ({ form }: Props) => {
               />
             </div>
           )}
-          {form.watch('max_supply') && (
+          {Boolean(form.watch('max_supply')) && (
             <div className='flex items-center gap-x-2'>
               <span className=' font-extrabold'>Max Supply:</span>{' '}
-              <span>{form.watch('max_supply')}</span>
+              <span>{Number(form.watch('max_supply')).toLocaleString()}</span>
             </div>
           )}
           {form.watch('mintable') && (
@@ -81,7 +81,10 @@ export const Header = ({ form }: Props) => {
         </div>
         <div className='w-full lg:w-auto'>
           {isConnected ? (
-            <button className='px-5 py-2  text-[14px] rounded-[8px] border border-[#303030] text-white flex items-center gap-x-2'>
+            <button
+              className='px-5 py-2  text-[14px] rounded-[8px] border border-[#303030] text-white flex items-center gap-x-2'
+              onClick={onLogout}
+            >
               {primaryWallet?.address.slice(0, 6)}...
               {primaryWallet?.address.slice(-4)}
             </button>

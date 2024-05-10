@@ -13,10 +13,6 @@ export const TokenContract = ({ form }: Props) => {
         name='token_contract'
         rules={{
           required: 'This field is required',
-          pattern: {
-            value: /^[\w-]+\.[\w-]+\.[\w-]+$/,
-            message: 'Invalid token',
-          },
         }}
         render={({ field: { onChange, value } }) => (
           <TextInput
@@ -24,7 +20,9 @@ export const TokenContract = ({ form }: Props) => {
             label='Token'
             value={value?.replace(' ', '')}
             onChange={onChange}
-            errorMessage={form.formState.errors.token?.message as string}
+            errorMessage={
+              form.formState.errors.token_contract?.message as string
+            }
           />
         )}
       />

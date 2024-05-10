@@ -16,8 +16,8 @@ export const InitialMint = ({ form }: Props) => {
         }}
         render={({ field: { onChange, value } }) => (
           <TextInput
-            placeholder='Token Name'
-            label='Token Name:'
+            placeholder='Create Wallet'
+            label='Create Wallet'
             value={value}
             onChange={onChange}
             errorMessage={form.formState.errors.initial_mint?.message as string}

@@ -2,7 +2,7 @@
 import { Step, Stepper } from '@/components/Stepper/Stepper'
 import { useForm } from 'react-hook-form'
 import { Header, MaxSupply, TokenInput, TokenName } from './components'
-import { useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { TokenIcon } from './components/TokenIcon'
 import { Mintable } from './components/Mintable'
 import { Burnable } from './components/Burnable'
@@ -62,20 +62,6 @@ export default function App() {
   const isConnected = primaryWallet?.connected
 
   const onSubmit = (formData: any) => {
-    if (!isConnected) {
-      toast.error('Please connect wallet', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'dark',
-        toastId: 'error',
-      })
-      return
-    }
     if (active === 0 && formData.token) {
       setActive(1)
     }
@@ -100,12 +86,23 @@ export default function App() {
     if (active === 6 && formData?.initial_mint) {
       setActive(7)
     }
-    if (active === 7 && formData?.token_contract) {
-      setActive(8)
-    }
 
-    if (active === STEP.length - 1) {
-      console.log('submit', formData)
+    if (active === 7 && formData?.token_contract) {
+      if (!isConnected) {
+        toast.error('Please connect wallet', {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+          toastId: 'error',
+        })
+        return
+      }
+      setActive(8)
     }
   }
 
@@ -128,6 +125,26 @@ export default function App() {
       return <TokenContract form={form} />
     }
   }
+  useEffect(() => {
+    ;(() => {
+      if (isConnected && active === 8) {
+        toast.success('Successfully Created Token', {
+          position: 'top-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+          toastId: 'success',
+        })
+        setActive(0)
+        form.reset()
+        return
+      }
+    })()
+  }, [active])
 
   return (
     <>
@@ -154,18 +171,18 @@ export default function App() {
           />
           <div className='w-full lg:px-0 px-4 lg:w-[60%]'>
             <p className='text_gradiant mt-4 lg:mt-0 text-[15px]'>
-              {STEP[active].description}
+              {STEP[active]?.description}
             </p>
             <div>
               <form onSubmit={form.handleSubmit(onSubmit)}>
                 <div className='my-10'>{renderInput()}</div>
-                {STEP.length - 1 === active ? (
-                  <DynamicWidget />
-                ) : (
-                  <button className='text-small text-white highlight-gradient h-[42px] rounded-lg px-3 w-full'>
-                    Next
-                  </button>
-                )}
+
+                <button
+                  className='text-small text-white highlight-gradient h-[42px] rounded-lg px-3 w-full'
+                  type='submit'
+                >
+                  {active === STEP.length - 1 ? 'Create Token' : 'Next'}
+                </button>
               </form>
             </div>
           </div>
