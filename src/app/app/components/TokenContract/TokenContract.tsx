@@ -11,13 +11,10 @@ export const TokenContract = ({ form }: Props) => {
       <Controller
         control={form.control}
         name='token_contract'
-        rules={{
-          required: 'This field is required',
-        }}
         render={({ field: { onChange, value } }) => (
           <TextInput
             placeholder='Token...'
-            label='Token'
+            label='Token (optional)'
             value={value?.replace(' ', '')}
             onChange={onChange}
             errorMessage={

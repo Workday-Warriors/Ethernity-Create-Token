@@ -8,11 +8,7 @@ import { Mintable } from './components/Mintable'
 import { Burnable } from './components/Burnable'
 import { InitialMint } from './components/InitialMint'
 import { TokenContract } from './components/TokenContract'
-import {
-  DynamicConnectButton,
-  DynamicWidget,
-  useDynamicContext,
-} from '@dynamic-labs/sdk-react-core'
+import { useDynamicContext } from '@dynamic-labs/sdk-react-core'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -57,7 +53,7 @@ const STEP: Step[] = [
 
 export default function App() {
   const form = useForm()
-  const { primaryWallet } = useDynamicContext()
+  const { primaryWallet, setShowAuthFlow } = useDynamicContext()
   const [active, setActive] = useState(0)
   const isConnected = primaryWallet?.connected
 
@@ -87,19 +83,20 @@ export default function App() {
       setActive(7)
     }
 
-    if (active === 7 && formData?.token_contract) {
+    if (active === 7) {
       if (!isConnected) {
-        toast.error('Please connect wallet', {
-          position: 'top-right',
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'dark',
-          toastId: 'error',
-        })
+        // toast.error('Please connect wallet', {
+        //   position: 'top-right',
+        //   autoClose: 2000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: 'dark',
+        //   toastId: 'error',
+        // })
+        setShowAuthFlow(true)
         return
       }
       setActive(8)
