@@ -32,6 +32,7 @@ export default function RootLayout({
             'coinbase',
             'walletconnect',
           ]),
+          // overrides: { evmNetworks },
         }}
         theme={'dark'}
       >

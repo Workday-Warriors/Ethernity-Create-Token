@@ -1,86 +1,87 @@
-'use client'
-import { Step, Stepper } from '@/components/Stepper/Stepper'
-import { useForm } from 'react-hook-form'
-import { Header, MaxSupply, TokenInput, TokenName } from './components'
-import { useEffect, useMemo, useState } from 'react'
-import { TokenIcon } from './components/TokenIcon'
-import { Mintable } from './components/Mintable'
-import { Burnable } from './components/Burnable'
-import { InitialMint } from './components/InitialMint'
-import { TokenContract } from './components/TokenContract'
-import { useDynamicContext } from '@dynamic-labs/sdk-react-core'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+"use client";
+import { Step, Stepper } from "@/components/Stepper/Stepper";
+import { useForm } from "react-hook-form";
+import { Header, MaxSupply, TokenInput, TokenName } from "./components";
+import { useEffect, useMemo, useState } from "react";
+import { TokenIcon } from "./components/TokenIcon";
+import { Mintable } from "./components/Mintable";
+import { Burnable } from "./components/Burnable";
+import { InitialMint } from "./components/InitialMint";
+import { TokenContract } from "./components/TokenContract";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const STEP: Step[] = [
   {
-    title: 'Token Symbol',
+    title: "Token Symbol",
     description:
-      'Token Symbol: a up to 8 characters string, no spaces or special characters (only letters and numbers)',
+      "Token Symbol: a up to 8 characters string, no spaces or special characters (only letters and numbers)",
   },
   {
-    title: 'Token Name',
+    title: "Token Name",
     description:
-      'Token Name: a up to 16 characters string, no special characters ',
+      "Token Name: a up to 16 characters string, no special characters ",
   },
   {
-    title: 'Token Icon',
-    description: 'allow to upload from computer (browse or drag and drop) ',
+    title: "Token Icon",
+    description: "allow to upload from computer (browse or drag and drop) ",
   },
   {
-    title: 'Max supply',
+    title: "Max supply",
     description:
-      ' An integer number. Would be ideal to have some preloaded options or something where user does not have to type in a lot of zeroes (e.g. a dropdown with numbers from 1 to 100 and then another combo with K (thousands), M (millions), T (trillions), or a bar with a selector, etc. look on the web)      ',
+      " An integer number. Would be ideal to have some preloaded options or something where user does not have to type in a lot of zeroes (e.g. a dropdown with numbers from 1 to 100 and then another combo with K (thousands), M (millions), T (trillions), or a bar with a selector, etc. look on the web)      ",
   },
   {
-    title: 'Mintable',
-    description: ' Yes or NO',
+    title: "Mintable",
+    description: " Yes or NO",
   },
   {
-    title: 'Burnable',
-    description: ' Yes or NO',
+    title: "Burnable",
+    description: " Yes or NO",
   },
   {
-    title: 'Initial mint to:',
-    description: ' for now only creator wallet',
+    title: "Initial mint to:",
+    description: " for now only creator wallet",
   },
   {
-    title: 'Ethereum token contract:',
+    title: "Ethereum token contract:",
     description:
-      'allow entry of token address on Ethereum (if the creator already has the same token on Ethereum blockchain and wants to make it bridgeable)',
+      "allow entry of token address on Ethereum (if the creator already has the same token on Ethereum blockchain and wants to make it bridgeable)",
   },
-]
+];
 
 export default function App() {
-  const form = useForm()
-  const { primaryWallet, setShowAuthFlow } = useDynamicContext()
-  const [active, setActive] = useState(0)
-  const isConnected = primaryWallet?.connected
+  const form = useForm();
+  const { primaryWallet, setShowAuthFlow } = useDynamicContext();
+  const [active, setActive] = useState(0);
+  const isConnected = primaryWallet?.connected;
+  // const customSigner = walletClientToCustomSigner(walletClient);
 
   const onSubmit = (formData: any) => {
     if (active === 0 && formData.token) {
-      setActive(1)
+      setActive(1);
     }
 
     if (active === 1 && formData?.token_name) {
-      setActive(2)
+      setActive(2);
     }
 
     if (active === 2 && formData?.token_icon) {
-      setActive(3)
+      setActive(3);
     }
     if (active === 3 && formData?.max_supply) {
-      setActive(4)
+      setActive(4);
     }
 
     if (active === 4 && formData?.mintable) {
-      setActive(5)
+      setActive(5);
     }
     if (active === 5 && formData?.burnable) {
-      setActive(6)
+      setActive(6);
     }
     if (active === 6 && formData?.initial_mint) {
-      setActive(7)
+      setActive(7);
     }
 
     if (active === 7) {
@@ -96,59 +97,61 @@ export default function App() {
         //   theme: 'dark',
         //   toastId: 'error',
         // })
-        setShowAuthFlow(true)
-        return
+
+        console.log("input form:", form.watch("token_name"));
+        setShowAuthFlow(true);
+        return;
       }
-      setActive(8)
+      setActive(8);
     }
-  }
+  };
 
   const renderInput = () => {
     if (active === 0) {
-      return <TokenInput form={form} />
+      return <TokenInput form={form} />;
     } else if (active === 1) {
-      return <TokenName form={form} />
+      return <TokenName form={form} />;
     } else if (active === 2) {
-      return <TokenIcon form={form} />
+      return <TokenIcon form={form} />;
     } else if (active === 3) {
-      return <MaxSupply form={form} />
+      return <MaxSupply form={form} />;
     } else if (active === 4) {
-      return <Mintable form={form} />
+      return <Mintable form={form} />;
     } else if (active === 5) {
-      return <Burnable form={form} />
+      return <Burnable form={form} />;
     } else if (active === 6) {
-      return <InitialMint form={form} />
+      return <InitialMint form={form} />;
     } else {
-      return <TokenContract form={form} />
+      return <TokenContract form={form} />;
     }
-  }
+  };
   useEffect(() => {
-    ;(() => {
+    (() => {
       if (isConnected && active === 8) {
-        toast.success('Successfully Created Token', {
-          position: 'top-right',
+        toast.success("Successfully Created Token", {
+          position: "top-right",
           autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: 'dark',
-          toastId: 'success',
-        })
-        setActive(0)
-        form.reset()
-        return
+          theme: "dark",
+          toastId: "success",
+        });
+        setActive(0);
+        form.reset();
+        return;
       }
-    })()
-  }, [active])
+    })();
+  }, [active]);
 
   return (
     <>
       <Header form={form} />
-      <div className=' container'>
+      <div className=" container">
         <ToastContainer
-          position='top-right'
+          position="top-right"
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}
@@ -157,28 +160,28 @@ export default function App() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
-          theme='light'
+          theme="light"
         />
 
-        <div className='pt-10 gap-x-10 lg:flex-row flex-col flex'>
+        <div className="pt-10 gap-x-10 lg:flex-row flex-col flex">
           <Stepper
             onChange={(act) => setActive(act)}
             active={active}
             steps={STEP}
           />
-          <div className='w-full lg:px-0 px-4 lg:w-[60%]'>
-            <p className='text_gradiant mt-4 lg:mt-0 text-[15px]'>
+          <div className="w-full lg:px-0 px-4 lg:w-[60%]">
+            <p className="text_gradiant mt-4 lg:mt-0 text-[15px]">
               {STEP[active]?.description}
             </p>
             <div>
               <form onSubmit={form.handleSubmit(onSubmit)}>
-                <div className='my-10'>{renderInput()}</div>
+                <div className="my-10">{renderInput()}</div>
 
                 <button
-                  className='text-small text-white highlight-gradient h-[42px] rounded-lg px-3 w-full'
-                  type='submit'
+                  className="text-small text-white highlight-gradient h-[42px] rounded-lg px-3 w-full"
+                  type="submit"
                 >
-                  {active === STEP.length - 1 ? 'Create Token' : 'Next'}
+                  {active === STEP.length - 1 ? "Create Token" : "Next"}
                 </button>
               </form>
             </div>
@@ -186,5 +189,5 @@ export default function App() {
         </div>
       </div>
     </>
-  )
+  );
 }
